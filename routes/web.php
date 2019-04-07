@@ -15,8 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::namespace('Admin')->name('admin.')->prefix('admin')->group(function () {
-    Route::get('/', 'DashboardController@index')->name('index');
+Route::namespace('Admin')
+    ->name('admin.')
+    ->prefix('admin')
+    ->middleware(['auth', 'can:access-admin'])
+    ->group(function () {
+    Route::get('/', 'DashboardController@index')
+        ->name('index');
 });
 
 Auth::routes();
