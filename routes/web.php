@@ -18,7 +18,7 @@ Route::get('/', function () {
 Route::namespace('Admin')
     ->name('admin.')
     ->prefix('admin')
-    ->middleware(['auth', 'can:access-admin'])
+    ->middleware(['auth', 'can:admin-access'])
     ->group(function () {
     Route::get('/', 'DashboardController@index')
         ->name('index');
