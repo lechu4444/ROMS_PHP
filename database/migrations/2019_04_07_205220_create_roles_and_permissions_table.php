@@ -45,6 +45,10 @@ class CreateRolesAndPermissionsTable extends Migration
             'name' => 'admin-access',
             'label' => 'Dostęp do panelu administracyjnego'
         ]);
+        $usersManagePermission = Permission::create([
+            'name' => 'users-manage',
+            'label' => 'Możliwość zarządzania użytkownikami'
+        ]);
 
         Schema::create('permission_role', function (Blueprint $table) {
             $table->integer('permission_id')->unsigned();
@@ -62,6 +66,10 @@ class CreateRolesAndPermissionsTable extends Migration
 
         DB::insert('insert into `permission_role` (`permission_id`, `role_id`) values (?, ?)', [
             $adminAccessPermission->id,
+            $adminRole->id,
+        ]);
+        DB::insert('insert into `permission_role` (`permission_id`, `role_id`) values (?, ?)', [
+            $usersManagePermission->id,
             $adminRole->id
         ]);
 

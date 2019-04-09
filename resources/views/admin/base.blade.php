@@ -113,7 +113,9 @@
             </div>
         </nav>
     </header>
-    @yield('content')
+    <div class="container-fluid">
+        @yield('content')
+    </div>
     <footer class="main-footer">
         <div class="container-fluid">
             <div class="row">
@@ -131,5 +133,7 @@
 
 <!-- Admin Scripts-->
 <script type="module" src="{{ asset('js/admin.js') }}"></script>
+<script>var jQuery = $;</script>
+@stack('scripts')
 </body>
 </html>
