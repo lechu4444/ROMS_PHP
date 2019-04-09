@@ -22,6 +22,27 @@ Route::namespace('Admin')
     ->group(function () {
     Route::get('/', 'DashboardController@index')
         ->name('index');
+
+    Route::name('users.')
+        ->prefix('users')
+        ->middleware(['can:users-manage'])
+        ->group(function () {
+            Route::get('/', 'UsersController@index')
+                ->name('index');
+            Route::get('add', 'UsersController@create')
+                ->name('add');
+            Route::get('edit/{id}', 'UsersController@edit')
+                ->name('edit');
+            Route::get('profile/{id}', 'UsersController@profile')
+                ->name('edit');
+
+            Route::post('add/{id}', 'UsersController@store')
+                ->name('add.post');
+            Route::post('edit/{id}', 'UsersController@update')
+                ->name('edit.post');
+            Route::post('delete/{id}', 'UsersController@destroy')
+                ->name('delete.post');
+        });
 });
 
 Auth::routes();
