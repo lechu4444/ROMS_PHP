@@ -2,7 +2,5 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/css/admin.css": "/css/admin.css",
-    "/js/app.js.map": "/js/app.js.map",
-    "/js/admin.js": "/js/admin.js",
-    "/vendor/datatables/buttons.server-side.js": "/vendor/datatables/buttons.server-side.js"
+    "/js/admin.js": "/js/admin.js"
 }

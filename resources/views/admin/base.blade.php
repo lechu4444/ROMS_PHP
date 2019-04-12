@@ -3,14 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Bootstrap Dashboard by Bootstrapious.com</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
-    <!-- Bootstrap CSS-->
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
-    <!-- Font Awesome CSS-->
-    <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
     <!-- Admin CSS-->
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
     <!-- Google fonts - Roboto -->
@@ -133,7 +130,17 @@
 
 <!-- Admin Scripts-->
 <script type="module" src="{{ asset('js/admin.js') }}"></script>
-<script>var jQuery = $;</script>
+<script type="text/javascript">
+    window.$ = window.jQuery;
+    (function(window,$){window.LaravelDataTables=window.LaravelDataTables||{};window.LaravelDataTables["dataTableBuilder"]=$("#dataTableBuilder").DataTable({"serverSide":true,"processing":true,"ajax":{"url":"","type":"GET","data":function(data) {
+                for (var i = 0, len = data.columns.length; i < len; i++) {
+                    if (!data.columns[i].search.value) delete data.columns[i].search;
+                    if (data.columns[i].searchable === true) delete data.columns[i].searchable;
+                    if (data.columns[i].orderable === true) delete data.columns[i].orderable;
+                    if (data.columns[i].data === data.columns[i].name) delete data.columns[i].name;
+                }
+                delete data.search.regex;}},"columns":[{"name":"id","data":"id","title":"Id","orderable":true,"searchable":true},{"name":"name","data":"name","title":"Name","orderable":true,"searchable":true},{"name":"email","data":"email","title":"Email","orderable":true,"searchable":true},{"name":"created_at","data":"created_at","title":"Created At","orderable":true,"searchable":true},{"name":"updated_at","data":"updated_at","title":"Updated At","orderable":true,"searchable":true},{"defaultContent":"","data":"action","name":"action","title":"Action","render":null,"orderable":false,"searchable":false,"width":"80px"}],"dom":"Bfrtip","order":[[0,"desc"]],"buttons":["create","export","print","reset","reload"]});})
+</script>
 @stack('scripts')
 </body>
 </html>

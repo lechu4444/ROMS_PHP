@@ -27,6 +27,8 @@ mix
         'node_modules/jquery.cookie/jquery.cookie.js',
         'node_modules/jquery-validation/dist/jquery.validate.js',
         'node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js',
+        'node_modules/datatables/media/js/jquery.dataTables.js',
+        'public/vendor/datatables/buttons.server-side.js',
         'resources/js/admin.js'
     ], 'public/js/admin.js')
     .sass('resources/sass/admin.scss', 'public/css')
