@@ -3,10 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Bootstrap Dashboard by Bootstrapious.com</title>
+    <title>{{ $pageTitle }}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
     <!-- Font Awesome CSS-->
@@ -113,7 +114,30 @@
             </div>
         </nav>
     </header>
-    @yield('content')
+    <div class="breadcrumb-holder">
+        <div class="container-fluid">
+            <ul class="breadcrumb">
+                @foreach ($breadcrumbs as $breadcrumb)
+                    <li class="breadcrumb-item {{ $breadcrumb['active'] ? 'active' : '' }}">
+                        <a href="{{ $breadcrumb['route'] }}">{{ $breadcrumb['label'] }}</a>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    </div>
+    <section>
+        <div class="container-fluid">
+            <header>
+                {{ $pageHeader }}
+            </header>
+            <div class="card">
+                <div class="card-header"></div>
+                <div class="card-body">
+                    @yield('content')
+                </div>
+            </div>
+        </div>
+    </section>
     <footer class="main-footer">
         <div class="container-fluid">
             <div class="row">

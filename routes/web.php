@@ -20,8 +20,15 @@ Route::namespace('Admin')
     ->prefix('admin')
     ->middleware(['auth', 'can:admin-access'])
     ->group(function () {
-    Route::get('/', 'DashboardController@index')
-        ->name('index');
+        Route::get('/', 'DashboardController@index')
+            ->name('index');
+
+        Route::name('users.')
+            ->prefix('users')
+            ->group(function () {
+                Route::get('/', 'UsersController@index')->name('index');
+                Route::get('/get-data', 'UsersController@getData')->name('get-data');
+            });
 });
 
 Auth::routes();
