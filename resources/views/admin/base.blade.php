@@ -119,7 +119,7 @@
             <ul class="breadcrumb">
                 @foreach ($breadcrumbs as $breadcrumb)
                     <li class="breadcrumb-item {{ $breadcrumb['active'] ? 'active' : '' }}">
-                        <a href="{{ $breadcrumb['route'] }}">{{ $breadcrumb['label'] }}</a>
+                        <a href="{{ route($breadcrumb['route']) }}">{{ $breadcrumb['label'] }}</a>
                     </li>
                 @endforeach
             </ul>
@@ -128,14 +128,16 @@
     <section>
         <div class="container-fluid">
             <header>
-                {{ $pageHeader }}
-            </header>
-            <div class="card">
-                <div class="card-header"></div>
-                <div class="card-body">
-                    @yield('content')
+                <div class="row">
+                    <div class="col-sm-6">
+                        {{ $pageHeader }}
+                    </div>
+                    <div class="col-sm-6">
+                        @yield('action-buttons')
+                    </div>
                 </div>
-            </div>
+            </header>
+            @yield('content')
         </div>
     </section>
     <footer class="main-footer">

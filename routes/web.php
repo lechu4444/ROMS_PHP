@@ -28,6 +28,7 @@ Route::namespace('Admin')
             ->group(function () {
                 Route::get('/', 'UsersController@index')->name('index');
                 Route::get('/get-data', 'UsersController@getData')->name('get-data');
+                Route::get('/add', 'UsersController@create')->name('add');
             });
 });
 

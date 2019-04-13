@@ -10,9 +10,6 @@ class UsersController extends Controller
 {
     public function index()
     {
-        $pageTitle = 'ROMS - Użytkownicy';
-        $pageHeader = 'Użytkownicy';
-
         return view('admin.users.index', compact('pageTitle', 'pageHeader'));
     }
 
