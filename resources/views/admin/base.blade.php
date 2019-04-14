@@ -119,7 +119,9 @@
             <ul class="breadcrumb">
                 @foreach ($breadcrumbs as $breadcrumb)
                     <li class="breadcrumb-item {{ $breadcrumb['active'] ? 'active' : '' }}">
-                        <a href="{{ route($breadcrumb['route']) }}">{{ $breadcrumb['label'] }}</a>
+                        <a href="{{ route($breadcrumb['route'], $breadcrumb['routeParameters']) }}">
+                            {{ $breadcrumb['label'] }}
+                        </a>
                     </li>
                 @endforeach
             </ul>

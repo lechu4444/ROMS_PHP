@@ -11,19 +11,23 @@ class BreadcrumbsComposer
     public function compose(View $view)
     {
         $routesDetail = Config::get('constants.routes_detail');
-        $routeName = request()->route()->action['as'];
+        $routeObject = request()->route();
+        $routeName = $routeObject->action['as'];
+        $routeParameters = $routeObject->parameters();
 
         $prevPages = $routesDetail[$routeName]['prev_pages'];
         $breadcrumbs = [];
 
         foreach ($prevPages as $i => $route) {
             $breadcrumbs[$i]['route'] = $route;
+            $breadcrumbs[$i]['routeParameters'] = [];
             $breadcrumbs[$i]['label'] = $routesDetail[$route]['title'];
             $breadcrumbs[$i]['active'] = false;
         }
 
         $breadcrumbs[] = [
             'route' => $routeName,
+            'routeParameters' => $routeParameters,
             'label' => $routesDetail[$routeName]['title'],
             'active' => true
         ];

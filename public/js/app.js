@@ -20419,7 +20419,7 @@ var render = function() {
                     "a",
                     {
                       staticClass: "btn btn-sm btn-primary",
-                      attrs: { href: "admin/users/edit/" + user.id }
+                      attrs: { href: "/admin/users/edit/" + user.id }
                     },
                     [_c("i", { staticClass: "fa fa-pencil" })]
                   ),

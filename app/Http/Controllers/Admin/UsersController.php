@@ -32,11 +32,23 @@ class UsersController extends Controller
         return ['data' => $users, 'draw' => $request->input('draw')];
     }
 
+    public function create()
+    {
+        $user = new User();
+        $routeAction = route('admin.users.add.post');
+
+        return view('admin.users.add_edit', compact('user', 'routeAction'));
+    }
+
     public function edit($id)
     {
         $user = User::find($id);
+        $routeAction = [
+            'admin.users.edit.post',
+            $user->id
+        ];
 
-        return view('admin.users.add_edit', compact('user'));
+        return view('admin.users.add_edit', compact('user', 'routeAction'));
     }
 
     public function destroy(Request $request, $id)

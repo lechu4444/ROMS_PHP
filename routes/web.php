@@ -30,7 +30,10 @@ Route::namespace('Admin')
                 Route::get('get-data', 'UsersController@getData')->name('get-data');
                 Route::get('add', 'UsersController@create')->name('add');
                 Route::get('edit/{id}', 'UsersController@edit')->name('edit');
-                Route::post('delete/{id}', 'UsersController@destroy')->name('delete');
+                
+                Route::post('add', 'UsersController@store')->name('add.post');
+                Route::post('edit/{id}', 'UsersController@update')->name('edit.post');
+                Route::post('delete/{id}', 'UsersController@destroy')->name('delete.post');
             });
 });
 
