@@ -30,7 +30,7 @@
                 <td>{{user.email}}</td>
                 <td>
                     <a :href="'admin/users/edit/'+user.id" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
-                    <a href="#" class="btn btn-sm btn-danger" :data-user-id="user.id"><i class="fa fa-trash"></i></a>
+                    <a href="#" class="btn btn-sm btn-danger" :data-user-id="user.id" @click="deleteUser"><i class="fa fa-trash"></i></a>
                 </td>
             </tr>
             </tbody>
@@ -105,7 +105,6 @@
             deleteUser(e) {
                 let userId = e.currentTarget.getAttribute('data-user-id');
                 let url = '/admin/users/delete';
-                console.log('userId');
                 this.tableData.draw++;
                 axios.post(url + '/' + userId, {params: this.tableData})
                     .then(response => {

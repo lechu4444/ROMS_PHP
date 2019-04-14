@@ -1895,7 +1895,6 @@ __webpack_require__.r(__webpack_exports__);
 
       var userId = e.currentTarget.getAttribute('data-user-id');
       var url = '/admin/users/delete';
-      console.log('userId');
       this.tableData.draw++;
       axios.post(url + '/' + userId, {
         params: this.tableData
@@ -20429,7 +20428,8 @@ var render = function() {
                     "a",
                     {
                       staticClass: "btn btn-sm btn-danger",
-                      attrs: { href: "#", "data-user-id": user.id }
+                      attrs: { href: "#", "data-user-id": user.id },
+                      on: { click: _vm.deleteUser }
                     },
                     [_c("i", { staticClass: "fa fa-trash" })]
                   )

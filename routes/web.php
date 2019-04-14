@@ -27,9 +27,10 @@ Route::namespace('Admin')
             ->prefix('users')
             ->group(function () {
                 Route::get('/', 'UsersController@index')->name('index');
-                Route::get('/get-data', 'UsersController@getData')->name('get-data');
-                Route::get('/add', 'UsersController@create')->name('add');
-                Route::post('/delete', 'UsersController@destroy')->name('delete');
+                Route::get('get-data', 'UsersController@getData')->name('get-data');
+                Route::get('add', 'UsersController@create')->name('add');
+                Route::get('edit/{id}', 'UsersController@edit')->name('edit');
+                Route::post('delete/{id}', 'UsersController@destroy')->name('delete');
             });
 });
 
