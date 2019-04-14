@@ -38,4 +38,9 @@ class User extends Authenticatable
         'birthday' => 'date',
         'email_verified_at' => 'datetime',
     ];
+
+    public function getFullnameAttribute()
+    {
+        return $this->name . ' ' . $this->surname;
+    }
 }

@@ -10,7 +10,7 @@ class UsersController extends Controller
 {
     public function index()
     {
-        return view('admin.users.index', compact('pageTitle', 'pageHeader'));
+        return view('admin.users.index');
     }
 
     public function getData(Request $request)
@@ -28,7 +28,24 @@ class UsersController extends Controller
                     ->orWhere('birthday', 'like', '%' . $searchValue . '%');
             });
         }
-        $projects = $query->paginate($length);
-        return ['data' => $projects, 'draw' => $request->input('draw')];
+        $users = $query->paginate($length);
+        return ['data' => $users, 'draw' => $request->input('draw')];
+    }
+
+    public function edit($id)
+    {
+        $user = User::find($id);
+
+        return view('admin.users.add_edit', compact('user'));
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        $user = User::find($id);
+        $userData['fullname'] = $user->fullname;
+
+        $user->delete();
+
+        return ['data' => $userData, 'draw' => $request->input('draw')];
     }
 }

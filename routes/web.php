@@ -29,6 +29,7 @@ Route::namespace('Admin')
                 Route::get('/', 'UsersController@index')->name('index');
                 Route::get('/get-data', 'UsersController@getData')->name('get-data');
                 Route::get('/add', 'UsersController@create')->name('add');
+                Route::post('/delete', 'UsersController@destroy')->name('delete');
             });
 });
 

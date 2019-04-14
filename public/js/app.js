@@ -1805,6 +1805,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1818,21 +1822,25 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     var sortOrders = {};
     var columns = [{
-      width: '25%',
+      width: '20%',
       label: 'Imię',
       name: 'name'
     }, {
-      width: '25%',
+      width: '20%',
       label: 'Nazwisko',
       name: 'surname'
     }, {
-      width: '25%',
+      width: '20%',
       label: 'Data urodzenia',
       name: 'birthday'
     }, {
-      width: '25%',
+      width: '20%',
       label: 'Email',
       name: 'email'
+    }, {
+      width: '20%',
+      label: 'Akcje',
+      name: 'actions'
     }];
     columns.forEach(function (column) {
       sortOrders[column.name] = -1;
@@ -1877,6 +1885,25 @@ __webpack_require__.r(__webpack_exports__);
           _this.users = data.data.data;
 
           _this.configPagination(data.data);
+        }
+      })["catch"](function (errors) {
+        console.log(errors);
+      });
+    },
+    deleteUser: function deleteUser(e) {
+      var _this2 = this;
+
+      var userId = e.currentTarget.getAttribute('data-user-id');
+      var url = '/admin/users/delete';
+      console.log('userId');
+      this.tableData.draw++;
+      axios.post(url + '/' + userId, {
+        params: this.tableData
+      }).then(function (response) {
+        var data = response.data;
+
+        if (_this2.tableData.draw == data.draw) {
+          _this2.getUsers();
         }
       })["catch"](function (errors) {
         console.log(errors);
@@ -20386,7 +20413,27 @@ var render = function() {
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(user.birthday))]),
                 _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(user.email))])
+                _c("td", [_vm._v(_vm._s(user.email))]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-sm btn-primary",
+                      attrs: { href: "admin/users/edit/" + user.id }
+                    },
+                    [_c("i", { staticClass: "fa fa-pencil" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-sm btn-danger",
+                      attrs: { href: "#", "data-user-id": user.id }
+                    },
+                    [_c("i", { staticClass: "fa fa-trash" })]
+                  )
+                ])
               ])
             }),
             0
