@@ -25,6 +25,8 @@
             <tbody>
             <tr v-for="user in users" :key="user.id">
                 <td>{{user.name}}</td>
+                <td>{{user.surname}}</td>
+                <td>{{user.birthday}}</td>
                 <td>{{user.email}}</td>
             </tr>
             </tbody>
@@ -47,8 +49,10 @@
         data() {
             let sortOrders = {};
             let columns = [
-                {width: '33%', label: 'Nazwa', name: 'name' },
-                {width: '33%', label: 'Email', name: 'email'}
+                {width: '25%', label: 'Imię', name: 'name' },
+                {width: '25%', label: 'Nazwisko', name: 'surname' },
+                {width: '25%', label: 'Data urodzenia', name: 'birthday' },
+                {width: '25%', label: 'Email', name: 'email'}
             ];
             columns.forEach((column) => {
                 sortOrders[column.name] = -1;

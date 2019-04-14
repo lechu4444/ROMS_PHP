@@ -1803,6 +1803,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1816,11 +1818,19 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     var sortOrders = {};
     var columns = [{
-      width: '33%',
-      label: 'Nazwa',
+      width: '25%',
+      label: 'Imię',
       name: 'name'
     }, {
-      width: '33%',
+      width: '25%',
+      label: 'Nazwisko',
+      name: 'surname'
+    }, {
+      width: '25%',
+      label: 'Data urodzenia',
+      name: 'birthday'
+    }, {
+      width: '25%',
       label: 'Email',
       name: 'email'
     }];
@@ -20371,6 +20381,10 @@ var render = function() {
             _vm._l(_vm.users, function(user) {
               return _c("tr", { key: user.id }, [
                 _c("td", [_vm._v(_vm._s(user.name))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(user.surname))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(user.birthday))]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(user.email))])
               ])
