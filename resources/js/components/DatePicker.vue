@@ -1,6 +1,6 @@
 <template>
     <div class="form-group row">
-        <input type="hidden" :name=fieldName :value=value />
+        <input type="hidden" :name=fieldName v-model=value />
         <label :for="fieldName + '-year'" class="col-sm-2 form-control-label">{{label}}</label>
         <div class="col-sm-10">
             <div class="row">
@@ -8,15 +8,22 @@
                     <input
                         :id="fieldName + '-year'"
                         type="number"
-                        max="2020"
+                        :max=maxYear
                         min="1900"
                         :name="fieldName + '-year'"
                         class="form-control"
-                        :value="selectedYear"
+                        v-model="selectedYear"
+                        @change="updateMaxDayAndValue"
                     />
                 </div>
                 <div class="col-sm-6">
-                    <select class="form-control" :name="fieldName + '-month'" :id="fieldName" v-model="selectedMonth">
+                    <select
+                            class="form-control"
+                            :name="fieldName + '-month'"
+                            :id="fieldName"
+                            v-model="selectedMonth"
+                            @change="updateMaxDayAndValue"
+                    >
                         <option v-for="month in months" :value="month.value">
                             {{ month.name }}
                         </option>
@@ -26,11 +33,12 @@
                     <input
                             :id="fieldName + '-day'"
                             type="number"
-                            :max=maxDay
+                            v-bind:max="maxDay"
                             min="1"
                             :name="fieldName + '-day'"
                             class="form-control"
-                            :value="selectedDay"
+                            v-model="selectedDay"
+                            @change="updateValue"
                     />
                 </div>
             </div>
@@ -40,7 +48,7 @@
 
 <script>
     export default {
-        props: ['label', 'fieldName', 'value'],
+        props: ['label', 'fieldName', 'value', 'maxYear'],
         created() {
             console.log('hi');
         },
@@ -116,23 +124,42 @@
                 }
             ];
 
+            let maxDay = months[selectedMonth - 1].daysAmount;
+            console.log(maxDay);
+
             return {
                 months: months,
                 selectedYear: selectedYear,
                 selectedMonth: selectedMonth,
                 selectedDay: selectedDay,
+                maxDay: maxDay
             }
         },
         methods: {
-            maxDay: function () {
-                let max = this.months[this.selectedMonth - 1].daysAmount;
-                console.log(max);
+            updateMaxDay: function () {
+                this.maxDay = this.months[this.selectedMonth - 1].daysAmount;
 
                 if (this.selectedMonth === '02' && this.selectedYear % 4 === 0) {
-                    max = 29
+                    this.maxDay = 29
                 }
 
-                return max;
+                if (this.selectedDay > this.maxDay) {
+                    this.selectedDay = this.maxDay;
+                }
+            },
+            updateValue: function () {
+                this.value = this.selectedYear + '-' + this.selectedMonth + '-' + this.addZero(this.selectedDay);
+            },
+            updateMaxDayAndValue: function () {
+                this.updateMaxDay();
+                this.updateValue();
+            },
+            addZero: function (number) {
+                if (number < 10) {
+                    return '0' + number;
+                } else {
+                    return number;
+                }
             }
         }
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -36,21 +37,24 @@ class UsersController extends Controller
     {
         $user = new User();
         $user->birthday = '1990-01-01';
+        $maxYear = Carbon::now()->format('Y');
 
         $routeAction = ['admin.users.add.post'];
 
-        return view('admin.users.add_edit', compact('user', 'routeAction'));
+        return view('admin.users.add_edit', compact('user', 'routeAction', 'maxYear'));
     }
 
     public function edit($id)
     {
         $user = User::find($id);
+        $maxYear = Carbon::now()->format('Y');
+
         $routeAction = [
             'admin.users.edit.post',
             $user->id
         ];
 
-        return view('admin.users.add_edit', compact('user', 'routeAction'));
+        return view('admin.users.add_edit', compact('user', 'routeAction', 'maxYear'));
     }
 
     public function destroy(Request $request, $id)
