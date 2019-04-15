@@ -20428,7 +20428,7 @@ var render = function() {
                     "a",
                     {
                       staticClass: "btn btn-sm btn-danger",
-                      attrs: { href: "#", "data-user-id": user.id },
+                      attrs: { href: "", "data-user-id": user.id },
                       on: { click: _vm.deleteUser }
                     },
                     [_c("i", { staticClass: "fa fa-trash" })]

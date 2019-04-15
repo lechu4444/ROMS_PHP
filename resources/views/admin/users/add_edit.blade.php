@@ -5,7 +5,7 @@
 
 @section('content')
     <div id="app" class="card">
-        <div class="card-header">Nowy użytkownik</div>
+        <div class="card-header">Formularz użytkownika</div>
         <div class="card-body">
             {{ Form::model($user, ['route' => $routeAction]) }}
                 <div class="form-group row">
@@ -20,7 +20,7 @@
                         {{ Form::text('surname', $user->surname, ['class' => 'form-control']) }}
                     </div>
                 </div>
-                <date-picker></date-picker>
+                <date-picker field-name="birthday" label="Data urodzenia" value="{{ $user->birthday->format('Y-m-d') }}"></date-picker>
             {{ Form::close() }}
         </div>
     </div>

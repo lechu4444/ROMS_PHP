@@ -35,7 +35,9 @@ class UsersController extends Controller
     public function create()
     {
         $user = new User();
-        $routeAction = route('admin.users.add.post');
+        $user->birthday = '1990-01-01';
+
+        $routeAction = ['admin.users.add.post'];
 
         return view('admin.users.add_edit', compact('user', 'routeAction'));
     }
