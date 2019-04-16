@@ -7,6 +7,15 @@
     <div id="app" class="card">
         <div class="card-header">Formularz użytkownika</div>
         <div class="card-body forms">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             {{ Form::model($user, ['route' => $routeAction]) }}
                 <div class="form-group row">
                     {{ Form::label('name', 'Imię', ['class' => 'col-sm-2 form-control-label']) }}
@@ -36,9 +45,16 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    {{ Form::label('cpassword', 'Powtórz hasło', ['class' => 'col-sm-2 form-control-label']) }}
+                    {{ Form::label('password_confirmation', 'Powtórz hasło', ['class' => 'col-sm-2 form-control-label']) }}
                     <div class="col-sm-10">
-                        {{ Form::password('cpassword', ['class' => 'form-control']) }}
+                        {{ Form::password('password_confirmation', ['class' => 'form-control']) }}
+                    </div>
+                </div>
+                <div class="line"></div>
+                <div class="form-group row">
+                    {{ Form::label('avatar', 'Avatar', ['class' => 'col-sm-2 form-control-label']) }}
+                    <div class="col-sm-10">
+                        {{ Form::file('avatar', ['class' => 'form-control-file']) }}
                     </div>
                 </div>
                 <div class="line"></div>
