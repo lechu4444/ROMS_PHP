@@ -41,7 +41,13 @@
                         {{ Form::password('cpassword', ['class' => 'form-control']) }}
                     </div>
                 </div>
-
+                <div class="line"></div>
+                <div class="form-group row">
+                    <div class="col-sm-10 offset-sm-2">
+                        {{ Form::submit('Zapisz', ['class' => 'btn btn-primary']) }}
+                        <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">Anuluj</a>
+                    </div>
+                </div>
 
             {{ Form::close() }}
         </div>
