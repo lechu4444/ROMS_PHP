@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Http\Services\Avatars;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -45,6 +48,22 @@ class UsersController extends Controller
         return view('admin.users.add_edit', compact('user', 'routeAction', 'maxYear'));
     }
 
+    public function store(StoreUserRequest $request, Avatars $avatars)
+    {
+        $user = new User();
+        $user->fill($request->only(['name', 'surname', 'birthday', 'email']));
+
+        if(!is_null($request->password)) {
+            $user->password = bcrypt($request->password);
+        }
+
+        $user->save();
+
+        $avatars->uploadAvatar($user, $request);
+
+        return redirect(route('admin.users.index'));
+    }
+
     public function edit($id)
     {
         $user = User::find($id);
@@ -56,6 +75,22 @@ class UsersController extends Controller
         ];
 
         return view('admin.users.add_edit', compact('user', 'routeAction', 'maxYear'));
+    }
+
+    public function update(UpdateUserRequest $request, Avatars $avatars, $id)
+    {
+        $user = User::findOrFail($id);
+        $user->fill($request->only(['name', 'surname', 'birthday', 'email']));
+
+        if(!is_null($request->password)) {
+            $user->password = bcrypt($request->password);
+        }
+
+        $user->save();
+
+        $avatars->uploadAvatar($user, $request);
+
+        return redirect(route('admin.users.index'));
     }
 
     public function destroy(Request $request, $id)
