@@ -29,7 +29,7 @@ class UpdateUserRequest extends FormRequest
             'birthday' => 'required|date|date_format:Y-m-d',
             'email' => 'required|email|unique:users',
             'password' => 'confirmed',
-            'avatar' => 'mimes:jpeg,jpg,png'
+            'avatar' => 'nullable|mimes:jpeg,jpg,png'
         ];
     }
 }

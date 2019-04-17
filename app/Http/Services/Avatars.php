@@ -19,7 +19,7 @@ class Avatars
 
         if ($request->hasFile('avatar')) {
             if ($request->file('avatar')->isValid()) {
-                $pathname = $request->file('input_photo')->getPathname();
+                $pathname = $request->file('avatar')->getPathname();
 
                 $img = Image::make($pathname)->orientate();
                 $img->resize(100, 100, function ($constraint) {

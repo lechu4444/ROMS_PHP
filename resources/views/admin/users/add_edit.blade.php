@@ -16,7 +16,7 @@
                     </ul>
                 </div>
             @endif
-            {{ Form::model($user, ['route' => $routeAction]) }}
+            {{ Form::model($user, ['route' => $routeAction,  'enctype' => 'multipart/form-data']) }}
                 <div class="form-group row">
                     {{ Form::label('name', 'Imię', ['class' => 'col-sm-2 form-control-label']) }}
                     <div class="col-sm-10">
