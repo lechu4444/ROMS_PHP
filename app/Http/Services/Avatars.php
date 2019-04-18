@@ -8,30 +8,23 @@ use Laravolt\Avatar\Facade as Avatar;
 
 class Avatars
 {
-    protected function createRandomAvatar($user, $savePath)
+    public function createRandomAvatar($savePath, $user)
     {
-        Avatar::create($user->fullname)->save($savePath);
+
+        if (!file_exists($savePath)) {
+            Avatar::create($user->fullname)->save($savePath);
+        }
     }
 
-    public function uploadAvatar($user, Request $request)
+    public function uploadAvatar($savePath, $pathname)
     {
-        $savePath = public_path('data/avatars/' . $user->id . '.png');
+        $img = Image::make($pathname)->orientate();
+        $img->resize(100, 100, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+        $img->resizeCanvas(100, 100);
 
-        if ($request->hasFile('avatar')) {
-            if ($request->file('avatar')->isValid()) {
-                $pathname = $request->file('avatar')->getPathname();
-
-                $img = Image::make($pathname)->orientate();
-                $img->resize(100, 100, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                });
-                $img->resizeCanvas(100, 100);
-            }
-        } else {
-            if (!file_exists($savePath)) {
-                $this->createRandomAvatar($user, $savePath);
-            }
-        }
+        $img->save($savePath);
     }
 }
