@@ -59,7 +59,19 @@ class UsersController extends Controller
 
         $user->save();
 
-        $avatars->uploadAvatar($user, $request);
+        $savePath = public_path('data/avatars/' . $user->id . '.png');
+
+        if ($request->hasFile('avatar')) {
+            if ($request->file('avatar')->isValid()) {
+                $pathname = $request->file('input_photo')->getPathname();
+                $avatars->uploadAvatar($savePath, $pathname);
+            }
+        } else {
+            if (!file_exists($savePath)) {
+                $avatars->createRandomAvatar($savePath, $user);
+            }
+        }
+
 
         return redirect(route('admin.users.index'));
     }
@@ -88,7 +100,18 @@ class UsersController extends Controller
 
         $user->save();
 
-        $avatars->uploadAvatar($user, $request);
+        $savePath = public_path('data/avatars/' . $user->id . '.png');
+
+        if ($request->hasFile('avatar')) {
+            if ($request->file('avatar')->isValid()) {
+                $pathname = $request->file('input_photo')->getPathname();
+                $avatars->uploadAvatar($savePath, $pathname);
+            }
+        } else {
+            if (!file_exists($savePath)) {
+                $avatars->createRandomAvatar($savePath, $user);
+            }
+        }
 
         return redirect(route('admin.users.index'));
     }
