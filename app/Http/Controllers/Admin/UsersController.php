@@ -68,7 +68,7 @@ class UsersController extends Controller
             }
         } else {
             if (!file_exists($savePath)) {
-                $avatars->createRandomAvatar($savePath, $user);
+                $avatars->createRandomAvatar($user);
             }
         }
 
@@ -105,11 +105,11 @@ class UsersController extends Controller
         if ($request->hasFile('avatar')) {
             if ($request->file('avatar')->isValid()) {
                 $pathname = $request->file('input_photo')->getPathname();
-                $avatars->uploadAvatar($savePath, $pathname);
+                $avatars->uploadAvatar($user->id, $pathname);
             }
         } else {
             if (!file_exists($savePath)) {
-                $avatars->createRandomAvatar($savePath, $user);
+                $avatars->createRandomAvatar($user);
             }
         }
 
