@@ -1809,6 +1809,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1822,11 +1823,15 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     var sortOrders = {};
     var columns = [{
-      width: '20%',
+      width: '10%',
+      label: '',
+      name: 'avatar'
+    }, {
+      width: '15%',
       label: 'Imię',
       name: 'name'
     }, {
-      width: '20%',
+      width: '15%',
       label: 'Nazwisko',
       name: 'surname'
     }, {
@@ -20406,6 +20411,13 @@ var render = function() {
             "tbody",
             _vm._l(_vm.users, function(user) {
               return _c("tr", { key: user.id }, [
+                _c("td", { staticClass: "text-center" }, [
+                  _c("img", {
+                    staticClass: "d-inline-block",
+                    attrs: { src: user.avatar, alt: user.id, width: "25%" }
+                  })
+                ]),
+                _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(user.name))]),
                 _vm._v(" "),
                 _c("td", [_vm._v(_vm._s(user.surname))]),

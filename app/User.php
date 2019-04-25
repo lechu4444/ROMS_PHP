@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\URL;
 
 class User extends Authenticatable
 {
@@ -42,5 +44,14 @@ class User extends Authenticatable
     public function getFullnameAttribute()
     {
         return $this->name . ' ' . $this->surname;
+    }
+
+    public function getAvatarUrl()
+    {
+        $avatarsConfig = Config::get('constants.avatars');
+
+        return url($avatarsConfig['url']
+            . $this->id
+            . '.' . $avatarsConfig['file_extension']);
     }
 }

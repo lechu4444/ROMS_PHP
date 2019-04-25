@@ -24,6 +24,7 @@
         <datatable :columns="columns" :sortKey="sortKey" :sortOrders="sortOrders" @sort="sortBy">
             <tbody>
             <tr v-for="user in users" :key="user.id">
+                <td class="text-center"><img :src=user.avatar :alt=user.id class="d-inline-block" width="25%"></td>
                 <td>{{user.name}}</td>
                 <td>{{user.surname}}</td>
                 <td>{{user.birthday}}</td>
@@ -53,8 +54,9 @@
         data() {
             let sortOrders = {};
             let columns = [
-                {width: '20%', label: 'Imię', name: 'name' },
-                {width: '20%', label: 'Nazwisko', name: 'surname' },
+                {width: '10%', label: '', name: 'avatar' },
+                {width: '15%', label: 'Imię', name: 'name' },
+                {width: '15%', label: 'Nazwisko', name: 'surname' },
                 {width: '20%', label: 'Data urodzenia', name: 'birthday' },
                 {width: '20%', label: 'Email', name: 'email'},
                 {width: '20%', label: 'Akcje', name: 'actions'}

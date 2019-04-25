@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Services\Avatars;
 use App\User;
 use Carbon\Carbon;
+use Collective\Html\HtmlFacade as HTML;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class UsersController extends Controller
 {
@@ -34,6 +35,11 @@ class UsersController extends Controller
             });
         }
         $users = $query->paginate($length);
+
+        foreach ($users as $user) {
+            $user['avatar'] = $user->getAvatarUrl();
+        }
+
         return ['data' => $users, 'draw' => $request->input('draw')];
     }
 

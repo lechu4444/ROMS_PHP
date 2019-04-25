@@ -3,6 +3,7 @@
 return [
     'avatars' => [
         'save_path' => public_path('data/avatars/'),
+        'url' => 'data/avatars/',
         'file_extension' => 'png'
     ],
     'routes_detail' => [

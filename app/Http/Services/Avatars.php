@@ -23,7 +23,7 @@ class Avatars
     public function createRandomAvatar($user)
     {
         $savePath = $this->avatarsConfig['save_path']
-            . $user->id
+            . $user->id . '.'
             . $this->avatarsConfig['file_extension'];
 
         if (!file_exists($savePath)) {
