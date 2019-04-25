@@ -3,16 +3,19 @@ namespace App\Http\Services;
 
 use App\User;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Input;
 use Intervention\Image\Facades\Image;
 use Laravolt\Avatar\Facade as Avatar;
 
 class Avatars
 {
     protected $avatarsConfig;
+    protected $laravoltConfig;
 
     public function __construct()
     {
         $this->avatarsConfig = Config::get('constants.avatars');
+        $this->laravoltConfig = Config::get('laravolt.avatar');
     }
 
     /**
@@ -37,19 +40,31 @@ class Avatars
      *
      * This function gives possibility to save uploaded avatar in public directory
      */
-    public function uploadAvatar($filename, $pathname)
+    public function uploadAvatar($user)
     {
+        $width = $this->laravoltConfig['width'];
+        $height = $this->laravoltConfig['height'];
+
+        $pathname = Input::file('avatar');
+
         $savePath = $this->avatarsConfig['save_path']
-            . $filename
+            . $user->id . '.'
             . $this->avatarsConfig['file_extension'];
 
         $img = Image::make($pathname)->orientate();
-        $img->resize(100, 100, function ($constraint) {
+        $img->encode('png');
+        $img->resize($width, $height, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
         });
-        $img->resizeCanvas(100, 100);
+        $img->resizeCanvas($width, $height);
 
+        $mask = Image::canvas($width, $height);
+        $mask->circle($width, $width/2, $height/2, function ($draw) {
+            $draw->background('#fff');
+        });
+
+        $img->mask($mask, false);
         $img->save($savePath);
     }
 }
