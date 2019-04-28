@@ -27,7 +27,7 @@ class StoreUserRequest extends FormRequest
             'name' => 'required',
             'surname' => 'required',
             'birthday' => 'required|date|date_format:Y-m-d',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
             'password' => 'required|confirmed',
             'avatar' => 'nullable|mimes:jpeg,jpg,png'
         ];

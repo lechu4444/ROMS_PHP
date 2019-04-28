@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateUserRequest extends FormRequest
@@ -23,11 +24,20 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules()
     {
+        $user = User::where('email', $this->email)->get()->first();
+        $uniqueUsers = '';
+
+        $id = (int) $this->route()->id;
+
+        if ($user !== null && $user->id !== $id) {
+            $uniqueUsers = '|unique:users';
+        }
+
         return [
             'name' => 'required',
             'surname' => 'required',
             'birthday' => 'required|date|date_format:Y-m-d',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email' . $uniqueUsers,
             'password' => 'confirmed',
             'avatar' => 'nullable|mimes:jpeg,jpg,png'
         ];
