@@ -15,6 +15,7 @@ class ViewServiceProvider extends ServiceProvider
     public function register()
     {
         View::composer('admin.base', 'App\Http\View\Composers\BreadcrumbsComposer');
+        View::composer('admin.base', 'App\Http\View\Composers\LoginUserComposer');
     }
 
     /**
