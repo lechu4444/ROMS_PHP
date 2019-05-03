@@ -42,4 +42,20 @@ class UpdateUserRequest extends FormRequest
             'avatar' => 'nullable|mimes:jpeg,jpg,png'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Pole imię jest wymagane',
+            'surname.required' => 'Pole nazwisko jest wymagane',
+            'birthday.required' => 'Pole data urodzenia jest wymagane',
+            'birthday.date' => 'Pole data urodzenia nie jest prawidłową datą',
+            'birthday.date_format' => 'Pole data urodzenia nie jest w formacie RRRR-MM-DD',
+            'email.required' => 'Pole email jest wymagane',
+            'email.email' => 'Format pola email nie jest prawidłowy',
+            'email.unique' => 'Taki email już istnieje w bazie danych',
+            'password.confirmed' => 'Potwierdzenie dla pola hasło nie zgadza się',
+            'avatar.mimes' => 'Pole avatar musi być plikiem typu jpeg, jpg, png',
+        ];
+    }
 }
