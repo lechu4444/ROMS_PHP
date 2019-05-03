@@ -1,7 +1,5 @@
 @import '../../node_modules/font-awesome/scss/font-awesome.scss';
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';
-@import '../vendor/bootstrap-dashboard/css/fontastic.css';
-@import '../vendor/bootstrap-dashboard/css/grasp_mobile_progress_circle-1.0.0.min.css';
-@import '../../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css';
-@import '../vendor/bootstrap-dashboard/css/style.default.css';
-@import '../vendor/bootstrap-dashboard/css/custom.css';
+//@import '../../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css';
+
+@import '../vendor/bootstrap-dashboard/sass/_admin_style.scss';

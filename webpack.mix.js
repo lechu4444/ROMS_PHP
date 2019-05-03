@@ -11,37 +11,8 @@ const mix = require('laravel-mix');
  |
  */
 
-mix
-    .js([
-        'resources/js/app.js'
-    ], 'public/js')
-    .sass('resources/sass/app.scss', 'public/css')
-    .sourceMaps();
+mix.js('resources/js/app.js', 'public/js')
+   .sass('resources/sass/app.scss', 'public/css');
 
-mix
-    .scripts([
-        'node_modules/jquery/dist/jquery.js',
-        'node_modules/popper.js/dist/popper.js',
-        'node_modules/bootstrap/dist/js/bootstrap.js',
-        'resources/vendor/bootstrap-dashboard/js/grasp_mobile_progress_circle-1.0.0.min.js',
-        'node_modules/jquery.cookie/jquery.cookie.js',
-        'node_modules/jquery-validation/dist/jquery.validate.js',
-        'node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js',
-        'resources/js/admin.js'
-    ], 'public/js/admin.js')
-    .sass('resources/sass/admin.scss', 'public/css')
-    .sourceMaps();
-// mix
-//     .js([
-//         'resources/vendor/bootstrap-dashboard/js/grasp_mobile_progress_circle-1.0.0.min.js',
-//         'resources/js/admin.js'
-//     ], 'public/js/admin.js')
-//     .extract([
-//         'jquery',
-//         'popper',
-//         'bootstrap',
-//         'jquery.cookie',
-//         'jquery-validation',
-//         'malihu-custom-scrollbar-plugin'
-//     ])
-//     .sass('resources/sass/admin.scss', 'public/css');
+mix.js('resources/js/admin.js', 'public/js')
+   .sass('resources/sass/admin.scss', 'public/css');

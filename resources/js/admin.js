@@ -20,7 +20,8 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('users', require('./components/Admin/Users.vue'));
+Vue.component('users', require('./components/Admin/Users.vue').default);
+Vue.component('date-picker', require('./components/DatePicker.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
